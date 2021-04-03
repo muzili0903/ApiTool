@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'paramAnalysis',
+    # 'paramAnalysis',
     'user'
 ]
 
@@ -45,7 +43,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -71,14 +69,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ApiTool.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ApiTool',
         'USER': 'root',
@@ -87,7 +84,6 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -107,7 +103,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -119,9 +114,9 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
-
+DATETIME_FORMAT = 'Y-m-d H:i:s'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
@@ -139,7 +134,7 @@ LOGGING = {
         },
         'verbose': {
             'format': ('%(asctime)s %(levelname)s [%(process)d-%(threadName)s] '
-                    '%(module)s.%(funcName)s line %(lineno)d: %(message)s'),
+                       '%(module)s.%(funcName)s line %(lineno)d: %(message)s'),
             'datefmt': '%Y-%m-%d %H:%M:%S',
         }
     },
@@ -152,7 +147,7 @@ LOGGING = {
         'info': {
             'class': 'logging.handlers.TimedRotatingFileHandler',
             'filename': '%s/logs/info.log' % BASE_DIR,  # 日志保存路径
-            'when': 'D',        # 每天切割日志
+            'when': 'D',  # 每天切割日志
             'backupCount': 30,  # 日志保留 30 天
             'formatter': 'simple',
             'level': 'INFO',
@@ -160,7 +155,7 @@ LOGGING = {
         'error': {
             'class': 'logging.handlers.TimedRotatingFileHandler',
             'filename': '%s/logs/error.log' % BASE_DIR,  # 日志保存路径
-            'when': 'W0',      # 每周一切割日志
+            'when': 'W0',  # 每周一切割日志
             'backupCount': 4,  # 日志保留 4 周
             'formatter': 'verbose',
             'level': 'WARNING',
