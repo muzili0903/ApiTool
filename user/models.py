@@ -23,3 +23,10 @@ class User(models.Model):
     ext3 = models.CharField(max_length=128)
     ext4 = models.CharField(max_length=128)
     ext5 = models.CharField(max_length=128)
+
+    def to_dict(self):
+        return {
+            'user': self.user,
+            'phone': self.phone,
+            'level': self.level
+        }
