@@ -3,11 +3,10 @@ import os
 
 from common.http import render_json
 from common import error
-from ApiTool.settings import BASE_DIR
 
 from .models import User
 
-from .logic import user_is_exist, password_is_identical
+from .logic import user_is_exist, password_is_identical, user_and_password_identical
 
 logInf = logging.getLogger('inf')
 logErr = logging.getLogger('err')
@@ -30,7 +29,14 @@ def register(request):
 
 
 def login(request):
-    pass
+    user = request.POST.get('user')
+    password = request.POST.get('password')
+    u = user_and_password_identical(user, password)
+    if u:
+        request.session['uid'] = u.id
+        logInf.info('用户登录成功 %s' % u.to_dict())
+        return render_json({'msg': '用户登录成功', 'data': u.to_dict()})
+    return render_json({'msg': '用户或密码错误'})
 
 
 def logout(request):
