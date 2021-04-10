@@ -1,6 +1,35 @@
 from django.http import HttpResponse
 from django.utils.deprecation import MiddlewareMixin
 
+from common import error
+from common.http import render_json
+from user.models import User
+
+
+class AuthMiddleware(MiddlewareMixin):
+    '''用户登陆验证中间件'''
+    WHITE_LIST = [
+        '/user/register',
+        '/user/login',
+    ]
+
+    def process_request(self, request):
+        # 如果请求的 URL 在白名单内，直接跳过检查
+        for path in self.WHITE_LIST:
+            if request.path.startswith(path):
+                return
+
+        # 进行登陆检查
+        uid = request.session.get('uid')
+        if uid:
+            try:
+                request.user = User.objects.get(id=uid)
+                return
+            except User.DoesNotExist:
+                request.session.flush()
+        return render_json('请登录', code=error.LOGIN_ERROR)
+
+
 
 class CorsMiddleware(MiddlewareMixin):
     '''处理客 JS 户端的跨域'''
