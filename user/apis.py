@@ -15,12 +15,12 @@ logErr = logging.getLogger('err')
 def register(request):
     user = request.POST.get('user')
     if user_is_exist(user):
-        logErr.error('该用户: %s 已存在' % user)
+        logInf.info('用户注册失败')
         return render_json({'msg': error.USER_EXIST_MSG}, code=error.USER_EXIST)
     password = request.POST.get('password')
     pwd = request.POST.get('pwd')
     if password_is_identical(password, pwd):
-        logErr.error('密码不一致，请重新输入密码')
+        logInf.info('密码不一致，请重新输入密码')
         return render_json({'msg': error.REGISTER_ERROR_MSG}, code=error.REGISTER_ERROR)
     User.objects.create(user=user, password=password)
     logInf.info('用户注册成功')
