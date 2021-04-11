@@ -1,5 +1,4 @@
 import logging
-import os
 
 from common.http import render_json
 from common import error
@@ -17,12 +16,12 @@ def register(request):
     user = request.POST.get('user')
     if user_is_exist(user):
         logErr.error('该用户: %s 已存在' % user)
-        return render_json({'msg': '该用户已存在'}, code=error.REGISTER_ERROR)
+        return render_json({'msg': error.USER_EXIST_MSG}, code=error.USER_EXIST)
     password = request.POST.get('password')
     pwd = request.POST.get('pwd')
     if password_is_identical(password, pwd):
         logErr.error('密码不一致，请重新输入密码')
-        return render_json({'msg': '密码不一致，请重新输入密码'}, code=error.REGISTER_ERROR)
+        return render_json({'msg': error.REGISTER_ERROR_MSG}, code=error.REGISTER_ERROR)
     User.objects.create(user=user, password=password)
     logInf.info('用户注册成功')
     return render_json({'msg': '用户注册成功'})
@@ -36,7 +35,7 @@ def login(request):
         request.session['uid'] = u.id
         logInf.info('用户登录成功 %s' % u.to_dict())
         return render_json({'msg': '用户登录成功', 'data': u.to_dict()})
-    return render_json({'msg': '用户或密码错误'})
+    return render_json({'msg': error.LOGIN_VERIFY_MSG}, code=error.LOGIN_VERIFY)
 
 
 def logout(request):

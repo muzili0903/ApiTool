@@ -27,7 +27,7 @@ class AuthMiddleware(MiddlewareMixin):
                 return
             except User.DoesNotExist:
                 request.session.flush()
-        return render_json('请登录', code=error.LOGIN_ERROR)
+        return render_json(error.LOGIN_ERROR_MSG, code=error.LOGIN_ERROR)
 
 
 
