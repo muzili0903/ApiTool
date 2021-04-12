@@ -8,10 +8,11 @@ logErr = logging.getLogger('err')
 def user_is_exist(user):
     try:
         User.objects.get(user=user)
-    except User.DoesNotExist:
+    except User.DoesNotExist as e:
+        logInf.info('该用户: %s 不存在' % e)
         return False
-    finally:
-        return True
+    logInf.info('该用户: %s 已存在' % user)
+    return True
 
 
 def password_is_identical(password, pwd):
