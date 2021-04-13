@@ -39,7 +39,10 @@ def login(request):
 
 
 def logout(request):
-    pass
+    user = request.POST.get('userName')
+    if user_is_exist(user):
+        del request.session['uid']
+        return render_json({'msg': '退出成功'})
 
 
 def user_del(request):
