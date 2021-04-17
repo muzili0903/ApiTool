@@ -25,7 +25,7 @@ urlpatterns = [
     # user
     path('user/register', u_apis.register),
     path('user/login', u_apis.login),
-    path('user/logic', u_apis.logout),
+    path('user/logout', u_apis.logout),
     path('user/del', u_apis.user_del),
 
     # paramAnalysis
