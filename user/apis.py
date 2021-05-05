@@ -42,6 +42,7 @@ def logout(request):
     user = request.POST.get('userName')
     if user_is_exist(user):
         del request.session['uid']
+        logInf.info('%s退出成功' % user)
         return render_json({'msg': '退出成功'})
 
 

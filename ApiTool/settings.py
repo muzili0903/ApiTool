@@ -136,7 +136,7 @@ LOGGING = {
         },
         'verbose': {
             'format': ('%(asctime)s %(levelname)s [%(process)d-%(threadName)s] '
-                       '%(module)s.%(funcName)s line %(lineno)d: %(message)s'),
+                       '%(filename)s %(module)s.%(funcName)s line %(lineno)d: %(message)s'),
             'datefmt': '%Y-%m-%d %H:%M:%S',
         }
     },
