@@ -20,7 +20,7 @@ class SqlDispose(models.Model):
     # 连接编号
     encoding = models.CharField(max_length=8)
     # 连接情况
-    linkTest = models.SmallIntegerField(max_length=1, default=0)
+    linkTest = models.SmallIntegerField(default=0)
     # 创建人
     founder = models.CharField(max_length=8)
     # 创建时间
