@@ -16,15 +16,15 @@ def register(request):
     user = request.POST.get('user')
     if user_is_exist(user):
         logInf.info('用户注册失败')
-        return render_json({'msg': error.USER_EXIST_MSG}, code=error.USER_EXIST)
+        return render_json(msg=error.USER_EXIST_MSG, code=error.USER_EXIST)
     password = request.POST.get('password')
     pwd = request.POST.get('pwd')
     if password_is_identical(password, pwd):
         logInf.info('密码不一致，请重新输入密码')
-        return render_json({'msg': error.REGISTER_ERROR_MSG}, code=error.REGISTER_ERROR)
+        return render_json(msg=error.REGISTER_ERROR_MSG, code=error.REGISTER_ERROR)
     User.objects.create(user=user, password=password)
     logInf.info('用户注册成功')
-    return render_json({'msg': '用户注册成功'})
+    return render_json(msg='用户注册成功')
 
 
 def login(request):
@@ -34,8 +34,8 @@ def login(request):
     if u:
         request.session['uid'] = u.id
         logInf.info('用户登录成功 %s' % u.to_dict())
-        return render_json({'msg': '用户登录成功', 'data': u.to_dict()})
-    return render_json({'msg': error.LOGIN_VERIFY_MSG}, code=error.LOGIN_VERIFY)
+        return render_json(msg='用户登录成功', data=u.to_dict())
+    return render_json(msg=error.LOGIN_VERIFY_MSG, code=error.LOGIN_VERIFY)
 
 
 def logout(request):
@@ -43,7 +43,7 @@ def logout(request):
     if user_is_exist(user):
         del request.session['uid']
         logInf.info('%s退出成功' % user)
-        return render_json({'msg': '退出成功'})
+        return render_json(msg='退出成功')
 
 
 def user_del(request):

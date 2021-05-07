@@ -14,7 +14,8 @@ logErr = logging.getLogger('err')
 def dispose_data(request):
     datalist = SqlDispose.objects.all()
     datalist = serializers.serialize("json", datalist)
-    return render_json({"msg": datalist})
+    print(type(datalist))
+    return render_json(data=datalist)
 
 
 def link_test(request):
