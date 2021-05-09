@@ -20,6 +20,7 @@ def dispose_data(request):
     datalist = SqlDispose.objects.all()
     data = paginator(current_page, page_size, datalist)
     logInf.info('response data %s' % data)
+    data = data.replace('null', 'None')
     return render_json(data=data)
 
 
