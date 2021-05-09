@@ -36,4 +36,5 @@ urlpatterns = [
     path('sqlDispose/linkTest', sql_apis.link_test),
     path('sqlDispose/disposeData', sql_apis.dispose_data),
     path('sqlDispose/disposeAll', sql_apis.dispose_all),
+    path('sqlDispose/insertSql', sql_apis.insert_sql),
 ]

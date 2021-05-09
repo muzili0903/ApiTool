@@ -31,5 +31,12 @@ def dispose_all(request):
     return render_json(data={'total': total})
 
 
+def insert_sql(request):
+    if request.method != 'POST':
+        logErr.info('请求方法不正确')
+        return render_json(msg='请求方法不正确')
+    pass
+
+
 def link_test(request):
     pass

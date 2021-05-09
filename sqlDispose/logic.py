@@ -1,6 +1,11 @@
 from django.core import serializers
 from django.core.paginator import Paginator, PageNotAnInteger, InvalidPage
 
+import logging
+
+logInf = logging.getLogger('inf')
+logErr = logging.getLogger('err')
+
 
 # Create your views here.
 def paginator(current_page, page_size, datalist):
@@ -11,6 +16,7 @@ def paginator(current_page, page_size, datalist):
         except PageNotAnInteger:
             data = paginator_data.page(1)
         except InvalidPage:
+            logErr.info(InvalidPage)
             return None
         data = serializers.serialize("json", data)
         return data
