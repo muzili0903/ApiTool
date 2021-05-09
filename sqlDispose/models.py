@@ -6,7 +6,7 @@ class SqlDispose(models.Model):
     # 主机名
     host = models.CharField(max_length=32)
     # 端口号
-    port = models.CharField(max_length=8)
+    port = models.CharField(max_length=8, blank=True, null=True)
     # 数据库用户名
     user = models.CharField(max_length=16)
     # 数据库密码
@@ -18,23 +18,23 @@ class SqlDispose(models.Model):
     # 引用标识
     mark = models.CharField(max_length=8)
     # 连接编号
-    encoding = models.CharField(max_length=8)
+    encoding = models.CharField(max_length=8, blank=True, null=True)
     # 连接情况
-    linkTest = models.SmallIntegerField(default=0)
+    linkTest = models.SmallIntegerField(default=0, blank=True, null=True)
     # 创建人
     founder = models.CharField(max_length=8)
     # 创建时间
-    create_time = models.DateTimeField(auto_now_add=True, blank=True)
+    create_time = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     # 更新人
-    update_person = models.CharField(max_length=8)
+    update_person = models.CharField(max_length=8, blank=True, null=True)
     # 更新时间
-    update_time = models.DateTimeField(auto_now=True, blank=True)
+    update_time = models.DateTimeField(auto_now=True, blank=True, null=True)
     # 扩展字段1~5
-    ext1 = models.CharField(max_length=128)
-    ext2 = models.CharField(max_length=128)
-    ext3 = models.CharField(max_length=128)
-    ext4 = models.CharField(max_length=128)
-    ext5 = models.CharField(max_length=128)
+    ext1 = models.CharField(max_length=128, blank=True, null=True)
+    ext2 = models.CharField(max_length=128, blank=True, null=True)
+    ext3 = models.CharField(max_length=128, blank=True, null=True)
+    ext4 = models.CharField(max_length=128, blank=True, null=True)
+    ext5 = models.CharField(max_length=128, blank=True, null=True)
 
     class Meta:
         ordering = ['-update_time', '-create_time']

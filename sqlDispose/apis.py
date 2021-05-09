@@ -4,7 +4,8 @@ from common.http import render_json
 from common import error
 
 from .models import SqlDispose
-from .logic import paginator
+from .logic import paginator, create_sql
+# from .forms import SqlDisposeForm, NewSqlDisposeForm
 
 logInf = logging.getLogger('inf')
 logErr = logging.getLogger('err')
@@ -35,7 +36,9 @@ def insert_sql(request):
     if request.method != 'POST':
         logErr.info('请求方法不正确')
         return render_json(msg='请求方法不正确')
-    pass
+    if create_sql(request):
+        return render_json(msg='新增成功')
+    return render_json(msg='新增失败')
 
 
 def link_test(request):
