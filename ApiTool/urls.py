@@ -18,6 +18,7 @@ from django.urls import path, include
 
 from paramAnalysis.views import index
 from user import apis as u_apis
+from sqlDispose import apis as sql_apis
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,4 +31,10 @@ urlpatterns = [
 
     # paramAnalysis
     path('paramAnalysis/index', index),
+
+    # sqlDispose
+    path('sqlDispose/linkTest', sql_apis.link_test),
+    path('sqlDispose/disposeData', sql_apis.dispose_data),
+    path('sqlDispose/disposeAll', sql_apis.dispose_all),
+    path('sqlDispose/insertSql', sql_apis.insert_sql),
 ]

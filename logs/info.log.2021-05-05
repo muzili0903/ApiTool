@@ -1,0 +1,10 @@
+2021-05-05 13:09:18 logic.user_and_password_identical: 用户00001844登录成功
+2021-05-05 13:09:18 apis.login: 用户登录成功 {'phone': '', 'level': 1, 'user': '00001844'}
+2021-05-05 13:09:20 logic.user_is_exist: 该用户: 00001844 已存在
+2021-05-05 13:09:20 apis.logout: 00001844退出成功
+2021-05-05 16:59:38 logic.user_and_password_identical: 用户00001844登录成功
+2021-05-05 16:59:38 apis.login: 用户登录成功 {'phone': '', 'user': '00001844', 'level': 1}
+2021-05-05 21:52:05 logic.user_is_exist: 该用户: 00001844 已存在
+2021-05-05 21:52:05 apis.logout: 00001844退出成功
+2021-05-05 21:53:10 logic.user_and_password_identical: 用户00001844登录成功
+2021-05-05 21:53:10 apis.login: 用户登录成功 {'phone': '', 'user': '00001844', 'level': 1}
