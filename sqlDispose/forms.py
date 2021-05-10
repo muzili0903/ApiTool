@@ -6,7 +6,7 @@ from .models import SqlDispose
 class SqlDisposeForm(forms.ModelForm):
     class Meta:
         model = SqlDispose
-        fields = ['host', 'user', 'password', 'dbName', 'sqlType', 'mark', 'founder', 'port']
+        fields = ['host', 'user', 'password', 'dbName', 'sqlType', 'mark', 'founder', 'port', 'encoding', 'linkTest']
 
 
 class NewSqlDisposeForm(forms.Form):

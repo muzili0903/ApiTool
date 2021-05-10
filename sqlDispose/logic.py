@@ -46,3 +46,26 @@ def create_sql(request):
     except ValueError as e:
         logErr.info(e)
         return False
+
+
+def create_sql_from(data):
+    sql_type_list = {'0': 'MySQL', '1': 'Oracle', '2': 'SqlService'}
+    host = data.get('host')
+    user = data.get('user')
+    password = data.get('password')
+    db_name = data.get('dbName')
+    sql_type = sql_type_list[data.get('sqlType')]
+    mark = data.get('mark')
+    founder = data.get('founder')
+    port = data.get('port') or None
+    encoding = data.get('encoding') or None
+    link_test = data.get('linkTest') or None
+    try:
+        SqlDispose.objects.create(host=host, user=user, password=password, dbName=db_name, sqlType=sql_type,
+                                  mark=mark, founder=founder, port=port, encoding=encoding,
+                                  linkTest=link_test)
+        logInf.info('SqlDispose新增成功')
+        return True
+    except ValueError as e:
+        logErr.info(e)
+        return False
