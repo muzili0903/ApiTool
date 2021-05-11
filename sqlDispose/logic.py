@@ -3,6 +3,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, InvalidPage
 
 import logging
 
+from sqlDispose.forms import UpdateSqlDisposeForm
 from .models import SqlDispose
 
 logInf = logging.getLogger('inf')
@@ -49,12 +50,11 @@ def create_sql(request):
 
 
 def create_sql_from(data):
-    sql_type_list = {'0': 'MySQL', '1': 'Oracle', '2': 'SqlService'}
     host = data.get('host')
     user = data.get('user')
     password = data.get('password')
     db_name = data.get('dbName')
-    sql_type = sql_type_list[data.get('sqlType')]
+    sql_type = data.get('sqlType')
     mark = data.get('mark')
     founder = data.get('founder')
     port = data.get('port') or None
@@ -65,6 +65,19 @@ def create_sql_from(data):
                                   mark=mark, founder=founder, port=port, encoding=encoding,
                                   linkTest=link_test)
         logInf.info('SqlDispose新增成功')
+        return True
+    except ValueError as e:
+        logErr.info(e)
+        return False
+
+
+def update_sql_from(data):
+    try:
+        pk = data.get('id')
+        sql = SqlDispose.objects.get(id=pk)
+        form = UpdateSqlDisposeForm(instance=sql, data=data)
+        form.save()
+        logInf.info('SqlDispose更新成功')
         return True
     except ValueError as e:
         logErr.info(e)

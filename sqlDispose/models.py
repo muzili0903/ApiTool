@@ -29,6 +29,8 @@ class SqlDispose(models.Model):
     update_person = models.CharField(max_length=8, blank=True, null=True)
     # 更新时间
     update_time = models.DateTimeField(auto_now=True, blank=True, null=True)
+    # 是否删除
+    is_del = models.SmallIntegerField(default='0')
     # 扩展字段1~5
     ext1 = models.CharField(max_length=128, blank=True, null=True)
     ext2 = models.CharField(max_length=128, blank=True, null=True)
