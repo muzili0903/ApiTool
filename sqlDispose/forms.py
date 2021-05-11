@@ -9,6 +9,13 @@ class SqlDisposeForm(forms.ModelForm):
         fields = ['host', 'user', 'password', 'dbName', 'sqlType', 'mark', 'founder', 'port', 'encoding', 'linkTest']
 
 
+class UpdateSqlDisposeForm(forms.ModelForm):
+    class Meta:
+        model = SqlDispose
+        fields = ['password', 'user', 'host', 'mark', 'encoding', 'update_person', 'dbName', 'sqlType', 'founder',
+                  'port', 'id']
+
+
 class NewSqlDisposeForm(forms.Form):
     host = forms.CharField(max_length=32,
                            label='主机名',
