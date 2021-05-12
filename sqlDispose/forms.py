@@ -16,6 +16,12 @@ class UpdateSqlDisposeForm(forms.ModelForm):
                   'port', 'id']
 
 
+class DeleteSqlDisposeForm(forms.ModelForm):
+    class Meta:
+        model = SqlDispose
+        exclude = ()
+
+
 class NewSqlDisposeForm(forms.Form):
     host = forms.CharField(max_length=32,
                            label='主机名',
