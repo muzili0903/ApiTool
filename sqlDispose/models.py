@@ -16,7 +16,7 @@ class SqlDispose(models.Model):
     # 数据库类型
     sqlType = models.CharField(max_length=8)
     # 引用标识
-    mark = models.CharField(max_length=8)
+    mark = models.CharField(max_length=8, unique=True)
     # 连接编号
     encoding = models.CharField(max_length=8, blank=True, null=True)
     # 连接情况

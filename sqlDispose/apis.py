@@ -4,7 +4,7 @@ from common.http import render_json
 from common import error
 
 from .models import SqlDispose
-from .logic import paginator, create_sql_from, update_sql_from
+from .logic import paginator, create_sql_from, update_sql_from, del_sql
 from .forms import SqlDisposeForm, UpdateSqlDisposeForm
 
 logInf = logging.getLogger('inf')
@@ -41,7 +41,7 @@ def insert_sql(request):
     if form.is_valid():
         if create_sql_from(form.cleaned_data):
             return render_json(msg='新增成功')
-    return render_json(msg='新增失败')
+    return render_json(code=error.INSERT_SQL_FAIL, msg=error.INSERT_SQL_FAIL_MSG)
 
 
 def update_sql(request):
@@ -53,6 +53,15 @@ def update_sql(request):
         if update_sql_from(request.POST):
             return render_json(msg='更新成功')
     return render_json(msg='更新失败')
+
+
+def delete_sql(request):
+    if request.method != 'POST':
+        logErr.info('请求方法不正确')
+        return render_json(msg='请求方法不正确')
+    if del_sql(request.POST):
+        return render_json(msg='删除成功')
+    return render_json(msg='删除失败')
 
 
 def link_test(request):

@@ -38,4 +38,5 @@ urlpatterns = [
     path('sqlDispose/disposeAll', sql_apis.dispose_all),
     path('sqlDispose/insertSql', sql_apis.insert_sql),
     path('sqlDispose/updateSql', sql_apis.update_sql),
+    path('sqlDispose/deleteSql', sql_apis.delete_sql),
 ]

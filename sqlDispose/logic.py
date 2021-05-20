@@ -64,7 +64,6 @@ def create_sql_from(data):
         SqlDispose.objects.create(host=host, user=user, password=password, dbName=db_name, sqlType=sql_type,
                                   mark=mark, founder=founder, port=port, encoding=encoding,
                                   linkTest=link_test)
-        logInf.info('SqlDispose新增成功')
         return True
     except ValueError as e:
         logErr.info(e)
@@ -78,6 +77,18 @@ def update_sql_from(data):
         form = UpdateSqlDisposeForm(instance=sql, data=data)
         form.save()
         logInf.info('SqlDispose更新成功')
+        return True
+    except ValueError as e:
+        logErr.info(e)
+        return False
+
+
+def del_sql(data):
+    try:
+        pk = data.get('id')
+        update_person = data.get('update_person')
+        SqlDispose.objects.filter(id=pk).update(is_del=1, update_person=update_person)
+        logInf.info('SqlDispose删除成功')
         return True
     except ValueError as e:
         logErr.info(e)
