@@ -5,6 +5,7 @@ import logging
 
 from sqlDispose.forms import UpdateSqlDisposeForm
 from .models import SqlDispose
+from common.sqlCommon import MySqlCom
 
 logInf = logging.getLogger('inf')
 logErr = logging.getLogger('err')
@@ -90,6 +91,31 @@ def del_sql(data):
         SqlDispose.objects.filter(id=pk).update(is_del=1, update_person=update_person)
         logInf.info('SqlDispose删除成功')
         return True
+    except ValueError as e:
+        logErr.info(e)
+        return False
+
+
+def link_test_sql(data):
+    try:
+        pk = data.get('id')
+        sql = SqlDispose.objects.get(id=pk)
+        host = sql.__dict__.get('host')
+        user = sql.__dict__.get('user')
+        password = sql.__dict__.get('password')
+        database = sql.__dict__.get('dbName')
+        port = sql.__dict__.get('port')
+        charset = sql.__dict__.get('charset')
+        db = MySqlCom(host=host, user=user, password=password, database=database, port=port,
+                      charset=charset)
+        if db.to_connected():
+            sql.__dict__.update(linkTest=1)
+            sql.save()
+            return True
+        else:
+            sql.__dict__.update(linkTest=0)
+            sql.save()
+            return False
     except ValueError as e:
         logErr.info(e)
         return False
