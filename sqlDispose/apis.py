@@ -4,7 +4,8 @@ from common.http import render_json
 from common import error
 
 from .models import SqlDispose
-from .logic import paginator, create_sql_from, update_sql_from, del_sql
+from .logic import paginator, create_sql_from, update_sql_from, del_sql, link_test_sql
+
 from .forms import SqlDisposeForm, UpdateSqlDisposeForm
 
 logInf = logging.getLogger('inf')
@@ -65,4 +66,9 @@ def delete_sql(request):
 
 
 def link_test(request):
-    pass
+    if request.method != 'POST':
+        logErr.info('请求方法不正确')
+        return render_json(msg='请求方法不正确')
+    if link_test_sql(request.POST):
+        return render_json(msg='数据库连接成功')
+    return render_json(msg='数据库连接失败')
